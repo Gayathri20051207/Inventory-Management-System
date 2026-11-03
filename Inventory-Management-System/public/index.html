@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101b2b">
+  <title>Stockwise — Inventory Management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" data-page="dashboard">
+        <span class="brand-mark">S</span>
+        <span><strong>stockwise</strong><small>INVENTORY SUITE</small></span>
+      </a>
+      <div class="workspace-label">WORKSPACE</div>
+      <nav class="nav">
+        <button class="nav-link active" data-page="dashboard"><span class="nav-icon">▦</span> Overview</button>
+        <button class="nav-link" data-page="products"><span class="nav-icon">▤</span> Products</button>
+        <button class="nav-link" data-page="suppliers"><span class="nav-icon">♧</span> Suppliers</button>
+        <button class="nav-link" data-page="transactions"><span class="nav-icon">⇄</span> Stock transactions</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-orb">✦</div>
+          <strong>Keep stock in control</strong>
+          <p>Track every item, order and movement in one place.</p>
+        </div>
+        <div class="profile"><div class="avatar">AD</div><div><strong>Administrator</strong><small>Workspace owner</small></div><span class="profile-dots">•••</span></div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="crumb"><span>Workspace</span><b>/</b><strong id="crumbTitle">Overview</strong></div>
+        <div class="top-actions"><span class="live-dot"></span><span class="system-status">System online</span><button class="icon-button" id="refreshBtn" title="Refresh data">↻</button><div class="top-avatar">AD</div></div>
+      </header>
+
+      <section class="page active" id="page-dashboard">
+        <div class="welcome-row">
+          <div><div class="eyebrow">TUESDAY, YOUR INVENTORY AT A GLANCE</div><h1>Good to see you<span class="accent">.</span></h1><p class="subheading">Here’s what’s happening with your inventory today.</p></div>
+          <button class="primary-btn" data-go="transactions"><span>＋</span> Record transaction</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Total products</span><span class="stat-symbol violet">▤</span></div><div class="stat-value" id="statProducts">—</div><div class="stat-foot">Unique items in catalogue</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Units in stock</span><span class="stat-symbol blue">▦</span></div><div class="stat-value" id="statUnits">—</div><div class="stat-foot">Across all products</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Suppliers</span><span class="stat-symbol green">♧</span></div><div class="stat-value" id="statSuppliers">—</div><div class="stat-foot">Active supplier records</div></article>
+          <article class="stat-card"><div class="stat-top"><span>Low stock items</span><span class="stat-symbol orange">!</span></div><div class="stat-value" id="statLow">—</div><div class="stat-foot"><span class="warning-text">Needs your attention</span></div></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel recent-panel"><div class="panel-heading"><div><h2>Recent activity</h2><p>Your latest stock movements</p></div><button class="text-btn" data-go="transactions">View all <span>→</span></button></div><div id="recentTable" class="table-wrap"></div></article>
+          <article class="panel low-panel"><div class="panel-heading"><div><h2>Stock alerts</h2><p>Items at or below reorder level</p></div><span class="alert-count" id="alertCount">0</span></div><div id="lowStockList" class="alert-list"></div></article>
+        </div>
+        <section class="visual-section"><div class="visual-heading"><div><div class="eyebrow">BUILT FOR BETTER OPERATIONS</div><h2>Everything in its right place.</h2></div><p>A clearer view of your products, people and stock movement.</p></div><div class="image-grid">
+          <div class="image-tile"><img src="/assets/warehouse.svg" alt="Warehouse shelves illustration"><div><strong>Organised inventory</strong><span>Know what you have</span></div></div>
+          <div class="image-tile"><img src="/assets/boxes.svg" alt="Stacked product boxes illustration"><div><strong>Product catalogue</strong><span>Every item accounted for</span></div></div>
+          <div class="image-tile"><img src="/assets/delivery.svg" alt="Delivery truck illustration"><div><strong>Stock movement</strong><span>Purchases and sales tracked</span></div></div>
+        </div></section>
+      </section>
+
+      <section class="page" id="page-products">
+        <div class="page-heading"><div><div class="eyebrow">INVENTORY CATALOGUE</div><h1>Products<span class="accent">.</span></h1><p class="subheading">Manage your items, pricing and stock levels.</p></div><button class="primary-btn" id="addProductBtn">＋ Add product</button></div>
+        <div class="mini-gallery"><img src="/assets/boxes.svg" alt="Product boxes"><img src="/assets/warehouse.svg" alt="Warehouse"><img src="/assets/delivery.svg" alt="Delivery"></div>
+        <article class="panel"><div class="toolbar"><div class="searchbox"><span>⌕</span><input id="productSearch" placeholder="Search products..."></div><select id="categoryFilter"><option value="">All categories</option><option>Electronics</option><option>Stationery</option><option>Office Supplies</option><option>Furniture</option><option>Other</option></select><span class="result-count" id="productCount"></span></div><div id="productsTable" class="table-wrap"></div></article>
+      </section>
+
+      <section class="page" id="page-suppliers">
+        <div class="page-heading"><div><div class="eyebrow">PARTNER DIRECTORY</div><h1>Suppliers<span class="accent">.</span></h1><p class="subheading">Build and maintain your supplier relationships.</p></div><button class="primary-btn" id="addSupplierBtn">＋ Add supplier</button></div>
+        <div class="mini-gallery"><img src="/assets/delivery.svg" alt="Delivery illustration"><img src="/assets/warehouse.svg" alt="Warehouse illustration"><img src="/assets/boxes.svg" alt="Product boxes"></div>
+        <article class="panel"><div class="toolbar"><div class="searchbox"><span>⌕</span><input id="supplierSearch" placeholder="Search suppliers..."></div><span class="result-count" id="supplierCount"></span></div><div id="suppliersTable" class="table-wrap"></div></article>
+      </section>
+
+      <section class="page" id="page-transactions">
+        <div class="page-heading"><div><div class="eyebrow">STOCK IN / STOCK OUT</div><h1>Transactions<span class="accent">.</span></h1><p class="subheading">Record purchases and sales to keep quantities accurate.</p></div></div>
+        <div class="mini-gallery"><img src="/assets/warehouse.svg" alt="Warehouse shelves"><img src="/assets/boxes.svg" alt="Inventory boxes"><img src="/assets/delivery.svg" alt="Delivery truck"></div>
+        <div class="transaction-layout">
+          <article class="panel form-panel"><div class="panel-heading"><div><h2>New stock movement</h2><p>Complete the details to update inventory.</p></div><span class="form-icon">⇄</span></div>
+            <form id="transactionForm" class="form-grid">
+              <label>Transaction type<select name="transaction_type" required><option value="purchase">Purchase · Stock in</option><option value="sale">Sale · Stock out</option></select></label>
+              <label>Product<select name="product_id" id="transactionProduct" required><option value="">Choose a product</option></select></label>
+              <label>Supplier <span class="optional">(optional for sales)</span><select name="supplier_id" id="transactionSupplier"><option value="">Choose a supplier</option></select></label>
+              <label>Quantity<input type="number" name="quantity" min="1" step="1" placeholder="e.g. 25" required></label>
+              <label class="full-field">Transaction date<input type="date" name="transaction_date" id="transactionDate" required></label>
+              <div class="stock-hint full-field" id="stockHint">Choose a product to see its available stock.</div>
+              <button class="primary-btn full-field" type="submit">Save transaction <span>→</span></button>
+            </form>
+          </article>
+          <aside class="transaction-aside"><div class="aside-illustration"><img src="/assets/delivery.svg" alt="Stock delivery illustration"></div><h3>Stock stays in sync.</h3><p>Each saved purchase or sale updates the product quantity automatically. Sales cannot exceed available stock.</p><div class="movement-key"><span><i class="key-dot in"></i> Purchase <b>Stock increases</b></span><span><i class="key-dot out"></i> Sale <b>Stock decreases</b></span></div></aside>
+        </div>
+        <article class="panel history-panel"><div class="panel-heading"><div><h2>Transaction history</h2><p>A complete record of stock movement</p></div><div class="searchbox small-search"><span>⌕</span><input id="transactionSearch" placeholder="Search history..."></div></div><div id="transactionsTable" class="table-wrap"></div></article>
+      </section>
+
+      <footer class="footer"><span>© 2026 Stockwise Inventory Suite</span><span>Designed for clarity <b>✦</b></span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><div class="eyebrow">INVENTORY DETAILS</div><h2 id="modalTitle">Add product</h2></div><button class="close-btn" id="closeModal" aria-label="Close">×</button></div><form id="recordForm"><div id="modalFields" class="form-grid"></div><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancel</button><button type="submit" class="primary-btn">Save details</button></div></form></div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="/script.js"></script>
+</body>
+</html>
